@@ -1,0 +1,33 @@
+body{
+-moz-user-select: none;  
+-webkit-user-select: none;  
+-ms-user-select: none;  
+-o-user-select: none;  
+user-select: none;
+}
+body,h2,h4,p,.przycisk,.etykieta,.button{
+font-family: 'Oxygen', sans-serif;
+}
+
+.przycisk{
+font-size:12px;
+}
+
+.right{
+text-align: right;
+}
+
+.dodaj1, .odzysk1, .blad{
+font-family: 'Oxygen', sans-serif;
+display:none;
+}
+
+.loguj1{
+font-family: 'Oxygen', sans-serif;
+display:block;
+}
+#stopka{
+font-family: 'Oxygen', sans-serif;
+font-size:10px;
+text-align:center;
+}
