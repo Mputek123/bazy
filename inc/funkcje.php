@@ -5,7 +5,7 @@
 		if(!$conn) {
 			die('Database connection error');
 		}
-		
+		 
 		return $conn;
 	}
 	
