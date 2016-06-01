@@ -7,7 +7,7 @@
 <title>Malgorzata Putek</title>
 <!-- Zakomentowany CSS z foundation bo przeszkadza i gryzie się z Bootstrapem, używamy albo Foundation albo Bootstrap -->
 <!-- <link rel="stylesheet" href="css/foundation.css"> -->
-<link rel="stylesheet" href="css/my.css">
+<link rel="stylesheet" href="/css/my.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
@@ -20,7 +20,7 @@
 table.report tr.data td {
 	background-color: #fff;
 	border-top: none;
-    font-size: 14pt;
+	font-size: 14pt;
 }
 
 /* Wiersze o klasie data mają czarną ramkę z dołu*/
@@ -54,38 +54,36 @@ table.report  tr.paging p {
 </style>
 </head>
 <body>
-
-<div class="container">
- <p></p>
-  <h4>Przeszukaj dane:</h4>
-<div class="row">
-<div class="col-lg-6">
-    <div class="input-group" >
-    <form action="index.php" method="post">
-      <input type="text" id="phrase" name="phrase" class="form-control" placeholder="Tutaj wpisz tekst...">
-      <span class="input-group-btn">
-     <input type="submit" class="btn btn-danger" class="form-control" value="Szukaj">
-     
-      </form>
-        <p></p>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-</div>
-
-
+    <div class="container">
+        <h4>Przeszukaj dane:</h4>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <form action="index.php" method="post" class="form form-inline">
+                        <div class="form-group">
+                            <input type="text" id="phrase" name="phrase" class="form-control" placeholder="Tutaj wpisz tekst...">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-danger" class="form-control" value="Szukaj">
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-default" href="logowanie.php">Logowanie</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
  <?php
- 
 	include ("loguj.php");
 	
-	$Search="";
-//	$_POST['phrase']=trim($_POST['phrase']); 
-// sprawdzenie, czy użytkownik wpisał dane
-if(!empty($_POST['phrase'])) 
-{
-	$Search = $_POST['phrase'];
-}
+	$Search = "";
+	// $_POST['phrase']=trim($_POST['phrase']);
+	// sprawdzenie, czy użytkownik wpisał dane
+	if (! empty ( $_POST ['phrase'] )) {
+		$Search = $_POST ['phrase'];
+	}
 	/* zapytanie do konkretnej tabeli */
 	$sql_query = "select a13.imie.imie, a13.nazwisko.nazwisko,  a13.ulica.ulica, a13.miasto.miasto, a13.kod.kod, 
 a13.stanowisko.stanowisko, a13.komorka.komorka from a13.pracownik
@@ -96,18 +94,17 @@ inner join a13.miasto on a13.pracownik.miasto_id = a13.miasto.id
 inner join a13.kod on a13.pracownik.kod_id = a13.kod.id
 inner join a13.stanowisko on a13.pracownik.stanowisko_id = a13.stanowisko.id
 inner join a13.komorka on a13.pracownik.komorka_id = a13.komorka.id
-WHERE a13.nazwisko.nazwisko like '%".$Search."%' or
-a13.ulica.ulica like '%".$Search."%' or
-a13.miasto.miasto like '%".$Search."%' or 
-a13.kod.kod like '%".$Search."%' or
-a13.stanowisko.stanowisko like '%".$Search."%' or
-a13.komorka.komorka like '%".$Search."%'
+WHERE a13.nazwisko.nazwisko like '%" . $Search . "%' or
+a13.ulica.ulica like '%" . $Search . "%' or
+a13.miasto.miasto like '%" . $Search . "%' or 
+a13.kod.kod like '%" . $Search . "%' or
+a13.stanowisko.stanowisko like '%" . $Search . "%' or
+a13.komorka.komorka like '%" . $Search . "%'
 ORDER by komorka, nazwisko;";
-
+	
 	$wynik = mysql_query ( $sql_query ) or die ( 'Błąd zapytania' );
 	
-	print ('<div class="container">
-        		<div class="panel panel-primary">
+	print ('<div class="panel panel-primary">
             	<div class="panel-heading text-center"><h1>LISTA PRACOWNIKÓW</h1></div></div>') ;
 	
 	/*
@@ -180,9 +177,11 @@ ORDER by komorka, nazwisko;";
 		echo '</tbody>';
 		echo '</table>';
 	}
-	echo '</div>';
 	mysql_close ( $polacz );
-
+	
 	?> 
-  </body>
+    </div>
+       </div>
+    </div>
+</body>
 </html>
